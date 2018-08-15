@@ -66,7 +66,7 @@ exports.expected = [
 ];
 
 exports.sections = construct(list, (section) => {
-    let units = ["", "章", "节"],
+    var units = ["", "章", "节"],
         num = last(section.id.split("."))
         orderName = units[section.level] ? ("第" + n2c(num) + units[section.level]) : section.id;
 
