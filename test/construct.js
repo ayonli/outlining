@@ -4,7 +4,7 @@ var last = require("lodash/last");
 var construct = require("..").construct;
 
 var list = [
-    { level: 1, title: "Chapter 1"},
+    { level: 1, title: "Chapter 1" },
     { level: 2, title: "Section 1" },
     { level: 2, title: "Section 2" },
     { level: 3, title: "Child Section 1" },
@@ -68,7 +68,7 @@ exports.expected = [
 exports.sections = construct(list, (section) => {
     var units = ["", "章", "节"],
         num = last(section.id.split("."))
-        orderName = units[section.level] ? ("第" + n2c(num) + units[section.level]) : section.id;
+    orderName = units[section.level] ? ("第" + n2c(num) + units[section.level]) : section.id;
 
     return {
         title: `${orderName} ${section.title}`

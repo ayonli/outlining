@@ -14,7 +14,7 @@ npm i outlining
 const { construct, constructMarkdown, constructHtml } = require("outlining");
 
 var list = [
-    { level: 1, title: "Chapter 1"},
+    { level: 1, title: "Chapter 1" },
     { level: 2, title: "Section 1" },
     { level: 2, title: "Section 2" },
     { level: 3, title: "Child Section 1" },
