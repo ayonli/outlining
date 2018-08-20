@@ -1,6 +1,6 @@
 {
   "name": "outlining",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Constructs outline section tokens from list items, markdown or HTML contents.",
   "main": "dist/index.js",
   "types": "src/index.ts",

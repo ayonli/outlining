@@ -9,6 +9,7 @@ import striptags = require("striptags");
  */
 namespace outlining {
     export interface ListItem {
+        [x: string]: any;
         level: number;
         title: string;
     }
@@ -18,7 +19,12 @@ namespace outlining {
         children?: Section[];
     }
 
-    export type Handler = (section: Section) => Section;
+    export type Handler = (section: Section) => {
+        [x: string]: any;
+        id?: string;
+        level?: number;
+        title?: string;
+    };
 
     /**
      * Constructs section tokens according to the given list items.
@@ -128,7 +134,7 @@ namespace outlining {
 
         if (!item) return parentSections;
 
-        let section = assign({ id: ""}, item);
+        let section: Section = assign({ id: ""}, item);
 
         if (section.level > parent.level) {
             parent.children = (parent.children || []).concat(parseSections(list, section, [section]));
