@@ -1,8 +1,9 @@
 import assign = require("lodash/assign");
+import filter = require("lodash/filter");
 import map = require("lodash/map");
-import trim =  require("lodash/trim");
 import nestedProperty = require("nested-property");
 import striptags = require("striptags");
+import * as marked from "marked";
 
 /**
  * Constructs outline section tokens from list items, markdown or HTML contents.
@@ -44,11 +45,12 @@ namespace outlining {
      *  returns an object to merge current one.
      */
     export function constructMarkdown(contents: string, handler?: Handler): Section[] {
-        let items: ListItem[] = map(contents.match(/#{1,6}(.+?)[\r\n]/g), item => {
-            let matches = item.match(/(#{1,6})(.+?)[\r\n]/);
+        let items: ListItem[] = map(filter(marked.lexer(contents), item => {
+            return item.type == "heading";
+        }), item => {
             return {
-                level: matches[1].length,
-                title: trim(matches[2])
+                level: item["depth"],
+                title: item["text"]
             };
         });
 
@@ -134,7 +136,7 @@ namespace outlining {
 
         if (!item) return parentSections;
 
-        let section: Section = assign({ id: ""}, item);
+        let section: Section = assign({ id: "" }, item);
 
         if (section.level > parent.level) {
             parent.children = (parent.children || []).concat(parseSections(list, section, [section]));

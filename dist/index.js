@@ -1,9 +1,10 @@
 "use strict";
 var assign = require("lodash/assign");
+var filter = require("lodash/filter");
 var map = require("lodash/map");
-var trim = require("lodash/trim");
 var nestedProperty = require("nested-property");
 var striptags = require("striptags");
+var marked = require("marked");
 var outlining;
 (function (outlining) {
     function construct(items, handler) {
@@ -12,11 +13,12 @@ var outlining;
     }
     outlining.construct = construct;
     function constructMarkdown(contents, handler) {
-        var items = map(contents.match(/#{1,6}(.+?)[\r\n]/g), function (item) {
-            var matches = item.match(/(#{1,6})(.+?)[\r\n]/);
+        var items = map(filter(marked.lexer(contents), function (item) {
+            return item.type == "heading";
+        }), function (item) {
             return {
-                level: matches[1].length,
-                title: trim(matches[2])
+                level: item["depth"],
+                title: item["text"]
             };
         });
         return construct(items, handler);

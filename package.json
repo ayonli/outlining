@@ -1,6 +1,6 @@
 {
   "name": "outlining",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Constructs outline section tokens from list items, markdown or HTML contents.",
   "main": "dist/index.js",
   "types": "src/index.ts",
@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/hyurl/outlining#readme",
   "dependencies": {
+    "@types/marked": "^0.4.1",
     "@types/node": "^10.7.0",
     "lodash": "^4.17.10",
+    "marked": "^0.5.0",
     "nested-property": "0.0.7",
     "striptags": "^3.1.1"
   },
